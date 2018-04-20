@@ -23,13 +23,14 @@ public class EmojiSearchApplication implements CommandLineRunner {
 	private TranslatorClient yandexClient;
 
 	public static void main(String[] args) {
-g		SpringApplication.run(EmojiSearchApplication.class, args);
+		SpringApplication.run(EmojiSearchApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.print(emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47"));
+		System.out.println(emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47"));
 		System.out.println(allegroClient.getOffersByPhrase("pilka nike"));
+		System.out.println(allegroClient.getOfferbyId("7074249172"));
 		System.out.println("phone(ENG)" + " = " + yandexClient.getTranslation("phone") + "(PL)");
 	}
 }
