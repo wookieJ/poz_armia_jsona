@@ -16,4 +16,12 @@ public class RestTemplateConfiguration {
                 .setReadTimeout(1000)
                 .build();
     }
+
+    @Bean
+    public RestTemplate yandexRestTemplate(RestTemplateBuilder builder) {
+        return builder.rootUri("https://translate.yandex.net/api/v1.5/tr/translate")
+                .setConnectTimeout(2000)
+                .setReadTimeout(1000)
+                .build();
+    }
 }
