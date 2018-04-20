@@ -27,12 +27,24 @@ public class EmojipediaClient implements EmojiClient {
                 HttpMethod.GET,
                 getUserAgent(),
                 String.class).getBody();
+
+        String jsonData = getEmojiDescriptionAsJson(payload);
+        return getEmojiNameFromJson(jsonData);
+    }
+
+    private String getEmojiNameFromJson(String jsonData) {
+        final String EMOJI_NAME = "name: ";
+        int startIndexOfName = jsonData.indexOf(EMOJI_NAME) + EMOJI_NAME.length();
+        int endIndexOfName = jsonData.indexOf("'", startIndexOfName + 1);
+        return jsonData.substring(startIndexOfName + 1, endIndexOfName);
+    }
+
+    private String getEmojiDescriptionAsJson(String payload) {
         final String startDataPhrase = "window.emojiData = ";
         int indexOfStartData = payload.indexOf(startDataPhrase)
                 + startDataPhrase.length();
         int indexOfEndData = payload.indexOf("};", indexOfStartData) + 2;
-        String jsonData = payload.substring(indexOfStartData, indexOfEndData -1);
-        return jsonData;
+        return payload.substring(indexOfStartData, indexOfEndData - 1);
     }
 
     private HttpEntity getUserAgent() {
