@@ -16,4 +16,12 @@ public class RestTemplateConfiguration {
                 .setReadTimeout(5000)
                 .build();
     }
+
+    @Bean
+    public RestTemplate allegroRestTemplate(RestTemplateBuilder builder) {
+        return builder.rootUri("https://allegroapi.io/")
+                .setConnectTimeout(2000)
+                .setReadTimeout(1000)
+                .build();
+    }
 }
