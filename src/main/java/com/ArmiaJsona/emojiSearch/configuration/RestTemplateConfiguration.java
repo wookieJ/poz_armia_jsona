@@ -13,7 +13,7 @@ public class RestTemplateConfiguration {
     public RestTemplate emojipediaRestTemplate(RestTemplateBuilder builder) {
         return builder.rootUri("https://emojipedia.org/emojipedia-api/")
                 .setConnectTimeout(2000)
-                .setReadTimeout(1000)
+                .setReadTimeout(5000)
                 .build();
     }
 }
