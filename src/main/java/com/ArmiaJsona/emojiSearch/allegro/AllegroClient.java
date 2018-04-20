@@ -23,13 +23,13 @@ public class AllegroClient implements AllegroClientInterface {
 
     @Override
     public String getOffersByPhrase(String phrase) {
-       return allegroRestTemplate.exchange(allegroApiUrl + "offers/?phrase=" + phrase, HttpMethod.GET, getUserAgent(), String.class ).getBody();
+       return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase, HttpMethod.GET, getUserAgent(), String.class ).getBody();
     }
 
     private HttpEntity getUserAgent() {
         HttpHeaders headers = new HttpHeaders();
         headers.put(HttpHeaders.USER_AGENT, Arrays.asList("Mozilla/5.0 (Client-Id 656cbe47-b17d-46c2-bae1-3222c8777d5b) Gecko/20100101 Firefox/59.0"));
-        headers.put(HttpHeaders.AUTHORIZATION, Arrays.asList("Bearer "+ API_KEY));
+        headers.put("Api-Key", Arrays.asList("eyJjbGllbnRJZCI6ImE0MWY1YjJhLThlODctNGI4Yi1iNmZlLTc0Y2M3NjM3MjBkNyJ9.ogVV_a9RUOMa1OWFZOTmgTkdk-U37vTliDCBUQ1YySU="));
         headers.put(HttpHeaders.ACCEPT, Arrays.asList("application/vnd.allegro.public.v1+json"));
         HttpEntity entity = new HttpEntity(headers);
         return entity;
