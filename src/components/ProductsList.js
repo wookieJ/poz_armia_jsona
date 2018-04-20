@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-
+import ProductItem from "./ProductItem";
 
 
 class ProductList extends Component {
@@ -8,7 +8,7 @@ class ProductList extends Component {
     return (
       <div>
         {this.props.products.map((item) => {
-            <p> {item.title} </p>
+            <ProductItem />
         })}
       </div>
     )

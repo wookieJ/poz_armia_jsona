@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import { Button, Form, Message } from "semantic-ui-react";
+
 import { connect } from 'react-redux'
 import { productsFetchData } from "../actions/index";
 import PropTypes from "prop-types";
+import '../styles/main.css'
 
 
-const style = {
-    width: '50%',
-    display: 'inline-block'
-}
 
 const buttonStyle = {
     width: '50%',
-    display: 'inline'
+    display: 'inline',
+    border: '1px solid gray',
+    
 }
 
 class SearchBar extends Component {
@@ -26,20 +25,23 @@ onChange = e => this.setState({searchTerm: e.target.value})
 
   render() {
     return (
-            <Form style ={style}>
-                <Form.Field>
+        <div className = 'formDiv'>
+            <form>
+                <span className = 'logo'> emojillegro </span>
                 <input
+                    className='input'
                     type="text"
                     id="searchTerm"
                     name="searchTerm"
                     placeholder="Czego szukasz?"
                     onChange = {this.onChange}
                     //onSubmit = {this.props.fetchData('http://jsonplaceholder.typicode.com/posts')}
-                    onSubmit = {this.props.fetchData(`https://allegroapi.io/offers?phrase=${this.state.searchTerm}`)}
+                    onSubmit = {this.props.fetchData('https://poz-armia-jsona.herokuapp.com/search?name=name')}
                 />
-                </Form.Field>
-                <Button style = {buttonStyle} >Szukaj</Button>
-            </Form>
+                
+                <button className = 'button' >Szukaj</button>
+            </form>
+            </div>
     );
   }
 }
