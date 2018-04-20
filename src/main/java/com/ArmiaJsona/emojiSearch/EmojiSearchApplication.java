@@ -27,8 +27,8 @@ public class EmojiSearchApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
-		System.out.println(emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47"));
+	public void run(String... args) {
+		System.out.print(emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47"));
 		System.out.println(allegroClient.getOffersByPhrase("pilka nike"));
 		System.out.println(allegroClient.getOfferbyId("7074249172"));
 		System.out.println("phone(ENG)" + " = " + yandexClient.getTranslation("phone") + "(PL)");
