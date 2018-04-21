@@ -15,6 +15,7 @@ public class OfferDetail {
     private Description offerDescription;
     private String description;
     private long views;
+    private long endingTime;
 
     public String getDescription() {
         return offerDescription.getPlainText();
@@ -22,6 +23,10 @@ public class OfferDetail {
 
     public long getViews() {
         return views;
+    }
+
+    public long getEndingTime() {
+        return endingTime;
     }
 
     public OfferDetail(){
