@@ -10,34 +10,33 @@ import java.util.List;
 @Service
 public class PhraseResolver {
 
-    public static final int NUMBER_OF_WORDS = 2;
+    private static final int NUMBER_OF_WORDS = 2;
     private final TranslatorClient translatorClient;
     private final EmojiClient emojiClient;
-    private final List<String> phrase;
 
     public PhraseResolver(TranslatorClient translatorClient, EmojiClient emojiClient) {
         this.translatorClient = translatorClient;
         this.emojiClient = emojiClient;
-        phrase = new ArrayList<>();
     }
 
-    public void changeEmojisToText(String phrase) {
+    public List<String> changeEmojisToText(String phrase) {
         phrase = PhraseParser.splitPhraseWithEmojis(phrase);
-
+        List<String> phraseDividedIntoWords = new ArrayList<>();
         String[] splittedWordBySpace = phrase.split(" ");
         for (String word : splittedWordBySpace) {
             if (isWordEmoji(word)) {
                 String emojiName = emojiClient.getEmojiNameByUnicode(word);
-                this.phrase.add(emojiName);
+                phraseDividedIntoWords.add(emojiName);
             } else {
-                this.phrase.add(word);
+                phraseDividedIntoWords.add(word);
             }
         }
+        return phraseDividedIntoWords;
     }
 
-    public String getPhraseInEnglish() {
+    public String getPhraseInEnglish(List<String> phraseDividedIntoWords) {
         StringBuilder builder = new StringBuilder();
-        for (String word : this.phrase) {
+        for (String word : phraseDividedIntoWords) {
             if (word.split(" ").length > NUMBER_OF_WORDS) {
                 String[] wordsInEmoji = word.split(" ");
                 word = wordsInEmoji[0] + " " + wordsInEmoji[1];
@@ -48,9 +47,9 @@ public class PhraseResolver {
         return builder.toString().trim();
     }
 
-    public String getPhraseInPolish() {
+    public String getPhraseInPolish(List<String> phraseDividedIntoWords) {
         StringBuilder builder = new StringBuilder();
-        for (String word : this.phrase) {
+        for (String word : phraseDividedIntoWords) {
             if (word.split(" ").length > NUMBER_OF_WORDS) {
                 String[] wordsInEmoji = word.split(" ");
                 word = wordsInEmoji[0] + " " + wordsInEmoji[1];

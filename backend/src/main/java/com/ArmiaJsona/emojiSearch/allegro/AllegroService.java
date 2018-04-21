@@ -23,14 +23,14 @@ public class AllegroService {
     }
 
     public List<Offer> getAllOffersByPhrase(String phrase, String sort) {
-        phraseResolver.changeEmojisToText(phrase);
-        String payload = phraseResolver.getPhraseInPolish();
+        List<String> phraseDividedIntoWords = phraseResolver.changeEmojisToText(phrase);
+        String payload = phraseResolver.getPhraseInPolish(phraseDividedIntoWords);
         List<Offer> listOfOffers = allegroClient
                 .getAllOffersByPhrase(payload, sort)
                 .getOfferList();
 
         if (listOfOffers.isEmpty()) {
-            payload = phraseResolver.getPhraseInEnglish();
+            payload = phraseResolver.getPhraseInEnglish(phraseDividedIntoWords);
             listOfOffers = allegroClient
                     .getAllOffersByPhrase(payload, sort)
                     .getOfferList();
