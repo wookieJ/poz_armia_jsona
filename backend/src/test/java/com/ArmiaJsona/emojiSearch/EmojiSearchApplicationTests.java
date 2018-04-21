@@ -53,7 +53,7 @@ public class EmojiSearchApplicationTests {
 
     @Test
     public void parseInputTest() {
-	    String body = phraseResolver.translatePhrasesWithEmojiToText("\uD83D\uDC7B\uD83C\uDF85test");
+	    String body = phraseResolver.changeEmojisToText("\uD83D\uDC7B\uD83C\uDF85test");
         System.out.println(body);
         assertThat(body).isEqualToIgnoringCase("Duch Święty Mikołaj test");
     }

@@ -22,7 +22,7 @@ public class AllegroService {
     }
 
     public List<Offer> getAllOffersByPhrase(String phrase, String sort) {
-        String payload = phraseResolver.translatePhrasesWithEmojiToText(phrase);
+        String payload = phraseResolver.changeEmojisToText(phrase);
         return allegroClient.getAllOffersByPhrase(payload, sort).getOfferList();
     }
 }
