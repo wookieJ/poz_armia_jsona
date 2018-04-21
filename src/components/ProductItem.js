@@ -4,9 +4,18 @@ import { connect } from "react-redux";
 import { detailsFetchData } from "../actions/index";
 
 class ProductItem extends Component {
+
+  state ={
+    detailView: false
+  }
+
   handleClick = () => {
     const url = "https://poz-armia-jsona.herokuapp.com//offers/";
     this.props.fetchDetails(url + this.props.id);
+    console.log(this.props.details);
+    this.setState({
+      detailView : !detailView
+    })
   };
 
   render() {
@@ -19,6 +28,11 @@ class ProductItem extends Component {
         </div>
         <p id="description">{this.props.name}</p>
         <p id="price">{this.props.price.amount},-</p>
+        {detailView && 
+          <div>
+            <p>szczegóły</p>
+          </div>
+        }
       </div>
     );
   }
