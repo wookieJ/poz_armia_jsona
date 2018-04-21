@@ -40,11 +40,11 @@ public class EmojiSearchApplicationTests {
 		assertThat(body).isNotEmpty();
 	}
 
-	@Test
-	public void returnAllegroOfferByIdTest() {
-		String body = this.allegroClient.getOfferbyId("7074249172");
-		assertThat(body).isNotEmpty();
-	}
+//	@Test
+//	public void returnAllegroOfferByIdTest() {
+//		String body = this.allegroClient.getOfferbyId("7074249172");
+//		assertThat(body).isNotEmpty();
+//	}
 
 
 
