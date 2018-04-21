@@ -2,7 +2,6 @@ package com.ArmiaJsona.emojiSearch.utils;
 
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
-import com.ArmiaJsona.emojiSearch.utils.PhraseParser;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +23,7 @@ public class PhraseResolver {
         for (String word : splittedWordBySpace) {
             if (isWordEmoji(word)) {
                 String emojiName = emojiClient.getEmojiNameByUnicode(word);
-                String emojiNameInPolish = translatorClient.getTranslation(emojiName);
+                String emojiNameInPolish = translatorClient.getTranslationFor(emojiName);
                 stringBuilder.append(emojiNameInPolish)
                         .append(" ");
             } else {
