@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @Service
@@ -17,6 +18,8 @@ public class AllegroClient implements AllegroClientInterface {
     private String allegroApiUrl;
     @Value("${AllegroIdAPI.URL}")
     private String allegroIdApiUrl;
+    @Value("${Allegro.Token")
+    private String allegroToken;
 
     private final RestTemplate allegroRestTemplate;
 
@@ -26,7 +29,10 @@ public class AllegroClient implements AllegroClientInterface {
 
     @Override
     public String getOffersByPhrase(String phrase) {
-        return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase, HttpMethod.GET, buildPhraseSearchHttpHeaders(), String.class).getBody();
+        return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase,
+                HttpMethod.GET,
+                buildHttpHeadersForAllegro(),
+                String.class).getBody();
     }
 
     @Override
@@ -34,24 +40,15 @@ public class AllegroClient implements AllegroClientInterface {
         ResponseEntity<OfferDetail> offerDetail = allegroRestTemplate.exchange(
                 allegroIdApiUrl + "v1/allegro/offers/" + id,
                 HttpMethod.GET,
-                buildIdSearchHttpHeaders(),
+                buildHttpHeadersForAllegro(),
                 OfferDetail.class);
         return offerDetail.getBody();
     }
 
-    private HttpEntity buildPhraseSearchHttpHeaders() {
+    private HttpEntity buildHttpHeadersForAllegro() {
         HttpHeaders headers = new HttpHeaders();
         headers.put(HttpHeaders.USER_AGENT, Collections.singletonList("Mozilla/5.0 (Client-Id 656cbe47-b17d-46c2-bae1-3222c8777d5b) Gecko/20100101 Firefox/59.0"));
-        headers.put("Api-Key", Collections.singletonList("eyJjbGllbnRJZCI6ImE0MWY1YjJhLThlODctNGI4Yi1iNmZlLTc0Y2M3NjM3MjBkNyJ9.ogVV_a9RUOMa1OWFZOTmgTkdk-U37vTliDCBUQ1YySU="));
-        headers.put(HttpHeaders.ACCEPT, Collections.singletonList("application/vnd.allegro.public.v1+json"));
-        return new HttpEntity(headers);
-    }
-
-    private HttpEntity buildIdSearchHttpHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.put(HttpHeaders.USER_AGENT, Collections.singletonList("Mozilla/5.0 (Client-Id 656cbe47-b17d-46c2-bae1-3222c8777d5b) Gecko/20100101 Firefox/59.0"));
-        String API_KEY = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhbGxlZ3JvX2FwaSJdLCJleHAiOjE1MjQyOTEyMzMsImp0aSI6IjMyYmQzOTNjLWRhN2ItNDhiOS1hYzlkLTFjNjljZDg1OTBkNCIsImNsaWVudF9pZCI6ImE0MWY1YjJhLThlODctNGI4Yi1iNmZlLTc0Y2M3NjM3MjBkNyJ9.bVHSZCQ-_4DA_bR7UiIaXFXbZJKflePKkuUMYn0wSNcrrBGKZBaZDddxuyU5PF4nKKkuiGg8RBFY69tC4EjeNx2TExug6qwVQiAD5pfL-czDMwI9L1A5N7lc8-LIWbpffmTEXomyd6ezGWPehOpqRUYTGu3AImJJvptDgiXUmeBPgCs6zlm3gV856C--VuSO7AFtIoG6DbLtq_IOEPQt6Zdn-FFMxA-zu2BjeMDKUjuW_rFFEm0i5NGh72dYNPRmOObKa59Fvzbhl2uPwsBUPRgm5rFI8x8WeWdDzwY5feOPZuZJkYXQ6oeiLViOhnqIa6F763Zutk-hVeOr-PbN-Q";
-        headers.put(HttpHeaders.AUTHORIZATION, Collections.singletonList("Bearer " + API_KEY));
+        headers.put(HttpHeaders.AUTHORIZATION, Arrays.asList("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhbGxlZ3JvX2FwaSJdLCJleHAiOjE1MjQzMjE1NjAsImp0aSI6IjcyY2I0ZDBjLWEzMzItNGQ3ZS1hMTdjLTQ4MDU5MzVkMjgyNSIsImNsaWVudF9pZCI6ImE0MWY1YjJhLThlODctNGI4Yi1iNmZlLTc0Y2M3NjM3MjBkNyJ9.PZ_lPj6ta_zsrRPPQX2J4RXfZ8ChYK7VCof2wg-b67Zkr71YdcRdIDJSRyzWhJqcQv3JRA6PTR7HhA7H5on2pQ37Z80g39G0iezdvDngdj3ecuUqy0M7aK0xGbldgYAFtioAOqCDTMJ0oQ5IVYHg2ncXe5BvVXOLkYhiRlDnSiNwvBGriW24rEnzdDySI1nfv2bwgt7OxoB3-dWfS2Ge9FlFizZcFIuMY0Gx8yVsG_lXIx7qaxx63aj2VPmOnaq4c-7eDaTvcooEGvqqAaEaXVcwVliNG1ExHm6Jyd86YScxdrQmg3rwlg6atiWEy4N6-fZfEEwJ6JpIycjs5trKzw"));
         headers.put(HttpHeaders.ACCEPT, Collections.singletonList("application/vnd.allegro.public.v1+json"));
         return new HttpEntity(headers);
     }
