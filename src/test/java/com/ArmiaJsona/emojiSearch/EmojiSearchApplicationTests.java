@@ -41,7 +41,7 @@ public class EmojiSearchApplicationTests {
 
     @Test
     public void returnAllegroOffersByPhraseTest() {
-        AllOffersResponse allOffersResponse = this.allegroClient.getAllOffersByPhrase("winogrona");
+        AllOffersResponse allOffersResponse = this.allegroClient.getAllOffersByPhrase("winogrona",null);
         assertThat(allOffersResponse).isNotNull();
     }
 
