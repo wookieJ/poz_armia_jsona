@@ -13,8 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @Service
-public class YandexClient implements TranslatorClient
-{
+public class YandexClient implements TranslatorClient {
 
     @Value("${Yandex.URL}")
     private String yandexUrl;
@@ -24,21 +23,18 @@ public class YandexClient implements TranslatorClient
 
     private RestTemplate yandexRestTemplate;
 
-    public YandexClient(RestTemplate yandexRestTemplate)
-    {
+    public YandexClient(RestTemplate yandexRestTemplate) {
         this.yandexRestTemplate = yandexRestTemplate;
     }
 
-    private HttpEntity getUserAgent()
-    {
+    private HttpEntity getUserAgent() {
         HttpHeaders headers = new HttpHeaders();
         headers.put(HttpHeaders.USER_AGENT, Collections.singletonList("Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"));
         return new HttpEntity(headers);
     }
 
     @Override
-    public String getTranslation(String word)
-    {
+    public String getTranslation(String word) {
         String url = yandexUrl + "?lang=" + LANG + "&key=" + API_KEY;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
