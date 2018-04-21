@@ -4,25 +4,25 @@ import { productsFetchData } from "../actions/index";
 import { connect } from "react-redux";
 
 class SortPanel extends Component {
-  handleClick(type, term) {
+
+  handlePriceUp(term){
     const url = "https://poz-armia-jsona.herokuapp.com//offers?phrase=";
-    switch (type) {
-      case "up":
-        this.props.fetchData(url + term + "&sort=+price");
-        console.log('1');
-        
-      case "down":
-        this.props.fetchData(url + term + "&sort=-price");
-        console.log('2');
-      case "popUp":
-        this.props.fetchData(url + term + "&sort=+popularity");
-        console.log('3');
-      case "popDown":
-        this.props.fetchData(url + term + "&sort=-popularity");
-        console.log('4');
-      default:
-        break;
-    }
+    this.props.fetchData(url + term + "&sort=+price");
+  }
+
+  handlePriceDown(term){
+    const url = "https://poz-armia-jsona.herokuapp.com//offers?phrase=";
+    this.props.fetchData(url + term + "&sort=-price");
+  }
+
+  handlePopUp(term){
+    const url = "https://poz-armia-jsona.herokuapp.com//offers?phrase=";
+    this.props.fetchData(url + term + "&sort=+popularity");
+  }
+
+  handlePopDown(term){
+    const url = "https://poz-armia-jsona.herokuapp.com//offers?phrase=";
+    this.props.fetchData(url + term + "&sort=-popularity");
   }
 
   render() {
@@ -34,26 +34,26 @@ class SortPanel extends Component {
           Sortuj po: {/* cena */}
           <span
             className="spans"
-            onClick={() => this.handleClick("up", this.props.term,)}
+            onClick={() => this.handlePriceUp(this.props.term)}
           >
             Cena ↗️
           </span>{" "}
           <span
             className="spans"
-            onClick={() => this.handleClick("down", this.props.term)}
+            onClick={() => this.handlePriceDown(this.props.term)}
           >
             Cena ↘️
           </span>
           {/* popularność */}
           <span
             className="spans"
-            onClick={() => this.handleClick("popUp", this.props.term)}
+            onClick={() => this.handlePopUp(this.props.term)}
           >
             Popularność ↗️
           </span>{" "}
           <span
             className="spans"
-            onClick={() => this.handleClick("popDown", this.props.term)}
+            onClick={() => this.handlePopDown(this.props.term)}
           >
             Popularność ↘️
           </span>
