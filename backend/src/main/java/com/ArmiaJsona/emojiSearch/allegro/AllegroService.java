@@ -1,5 +1,6 @@
 package com.ArmiaJsona.emojiSearch.allegro;
 
+import com.ArmiaJsona.emojiSearch.exception.OffersNotFoundException;
 import com.ArmiaJsona.emojiSearch.model.Offer;
 import com.ArmiaJsona.emojiSearch.utils.PhraseResolver;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,21 @@ public class AllegroService {
 
     public List<Offer> getAllOffersByPhrase(String phrase, String sort) {
         phraseResolver.changeEmojisToText(phrase);
-        String payload = phraseResolver.getPhraseInEnglish();
-        payload = phraseResolver.getPhraseInPolish();
-        return allegroClient.getAllOffersByPhrase(payload, sort).getOfferList();
+        String payload = phraseResolver.getPhraseInPolish();
+        List<Offer> listOfOffers = allegroClient
+                .getAllOffersByPhrase(payload, sort)
+                .getOfferList();
+
+        if (listOfOffers.isEmpty()) {
+            payload = phraseResolver.getPhraseInEnglish();
+            listOfOffers = allegroClient
+                    .getAllOffersByPhrase(payload, sort)
+                    .getOfferList();
+        }
+
+        if(listOfOffers.isEmpty()) {
+            throw new OffersNotFoundException("We didn't get any offers from Allegro service");
+        }
+        return listOfOffers;
     }
 }

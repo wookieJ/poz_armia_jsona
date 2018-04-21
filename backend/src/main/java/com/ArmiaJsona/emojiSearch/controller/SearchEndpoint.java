@@ -2,13 +2,11 @@ package com.ArmiaJsona.emojiSearch.controller;
 
 import com.ArmiaJsona.emojiSearch.allegro.AllegroService;
 import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
+import com.ArmiaJsona.emojiSearch.exception.OffersNotFoundException;
 import com.ArmiaJsona.emojiSearch.model.Offer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,8 +32,14 @@ public class SearchEndpoint {
     public ResponseEntity<OfferDetail> getOfferDetails(@PathVariable("offerId") String offerId) {
         OfferDetail offerById = allegroService.getOfferById(offerId);
         if (offerById != null)
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(offerById);
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+    @ExceptionHandler(OffersNotFoundException.class)
+    public ResponseEntity<String> noOffersFound(OffersNotFoundException e) {
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }
