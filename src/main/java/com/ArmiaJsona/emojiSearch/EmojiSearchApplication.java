@@ -27,12 +27,12 @@ public class EmojiSearchApplication implements CommandLineRunner {
         SpringApplication.run(EmojiSearchApplication.class, args);
     }
 
-    @Override
+	@Override
     public void run(String... args) {
         System.out.print(emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47"));
         System.out.println(allegroClient.getOffersByPhrase("pilka nike"));
-        System.out.println(allegroClient.getOfferbyId("7074249172"));
+        System.out.println(allegroClient.getOfferById("7074249172"));
         System.out.println("phone(ENG)" + " = " + yandexClient.getTranslation("phone") + "(PL)");
-        System.out.println(phraseResolver.translatePhrasesWithEmojiToText("\uD83D\uDD2A kuchenny"));
+        System.out.println(phraseResolver.translatePhrasesWithEmojiToText("\uD83C\uDF54\uD83C\uDF48Hello World"));
     }
 }
