@@ -6,13 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OfferList
-{
+public class OfferList {
     @JsonProperty("offers")
     private List<Offer> offerList;
 
-    public List<Offer> getOfferList()
-    {
+    public List<Offer> getOfferList() {
         return offerList;
     }
 

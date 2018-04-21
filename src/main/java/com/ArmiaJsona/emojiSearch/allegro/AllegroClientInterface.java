@@ -1,8 +1,10 @@
 package com.ArmiaJsona.emojiSearch.allegro;
 
+import com.ArmiaJsona.emojiSearch.controller.OfferDetail;
+
 public interface AllegroClientInterface {
 
     String getOffersByPhrase(String phrase);
 
-    String getOfferbyId(String id);
+    OfferDetail getOfferById(String id);
 }
