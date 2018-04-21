@@ -4,34 +4,62 @@ import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PhraseResolver {
 
+    public static final int NUMBER_OF_WORDS = 2;
     private final TranslatorClient translatorClient;
-    private EmojiClient emojiClient;
+    private final EmojiClient emojiClient;
+    private final List<String> phrase;
 
     public PhraseResolver(TranslatorClient translatorClient, EmojiClient emojiClient) {
         this.translatorClient = translatorClient;
         this.emojiClient = emojiClient;
+        phrase = new ArrayList<>();
     }
 
-    public String translatePhrasesWithEmojiToText(String phrase) {
+    public void changeEmojisToText(String phrase) {
         phrase = PhraseParser.splitPhraseWithEmojis(phrase);
 
-        StringBuilder stringBuilder = new StringBuilder();
         String[] splittedWordBySpace = phrase.split(" ");
         for (String word : splittedWordBySpace) {
             if (isWordEmoji(word)) {
                 String emojiName = emojiClient.getEmojiNameByUnicode(word);
-                String emojiNameInPolish = translatorClient.getTranslationFor(emojiName);
-                stringBuilder.append(emojiNameInPolish)
-                        .append(" ");
+                this.phrase.add(emojiName);
             } else {
-                stringBuilder.append(word)
-                        .append(" ");
+                this.phrase.add(word);
             }
         }
-        return stringBuilder.toString().trim();
+    }
+
+    public String getPhraseInEnglish() {
+        StringBuilder builder = new StringBuilder();
+        for (String word : this.phrase) {
+            if (word.split(" ").length > NUMBER_OF_WORDS) {
+                String[] wordsInEmoji = word.split(" ");
+                word = wordsInEmoji[0] + " " + wordsInEmoji[1];
+            }
+            builder.append(word)
+                    .append(" ");
+        }
+        return builder.toString().trim();
+    }
+
+    public String getPhraseInPolish() {
+        StringBuilder builder = new StringBuilder();
+        for (String word : this.phrase) {
+            if (word.split(" ").length > NUMBER_OF_WORDS) {
+                String[] wordsInEmoji = word.split(" ");
+                word = wordsInEmoji[0] + " " + wordsInEmoji[1];
+                word = translatorClient.getTranslationFor(word);
+            }
+            builder.append(word)
+                    .append(" ");
+        }
+        return builder.toString().trim();
     }
 
     private boolean isWordEmoji(String word) {
