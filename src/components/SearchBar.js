@@ -37,7 +37,7 @@ handleSubmit = (e) => {
     return (
         <div className = 'formDiv'>
             <form onSubmit = {this.handleSubmit}>
-                <span className = 'logo'> emojillegro </span>
+                <span className = 'logo'> emojillegr <span id='emoji'>🤑</span> </span>
                 <input
                     className='input'
                     type="text"

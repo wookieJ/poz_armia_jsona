@@ -1,3 +1,4 @@
+
 .formDiv {
     margin:2em auto; 
     display: 'grid';
@@ -28,7 +29,43 @@ form{
 }
 
 .logo{
-    padding: 2em;
-    font-size: 2em;
+    padding: 1.5em;
+    font-size: 2.5em;
     color:#ff5a00; 
+}
+
+#emoji {
+    font-size: 0.7em;
+    left: -3px;
+}
+.productItem{
+    background-color: #ffffff;
+    width: 60%;
+    margin: 0 auto;
+    height: 10em;
+    border-bottom: 1px solid #c7c7c7;
+    border-left: 1px solid #c7c7c7;
+    border-right: 1px solid #c7c7c7;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+}
+
+.image{
+    height: 10em;
+    
+}
+
+.image img {
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.productItem:first-of-type { 
+   border-top:  1px solid #c7c7c7;
+}
+.productsListDiv {
+    display: grid;
+    grid-template-columns: 1fr;
 }
