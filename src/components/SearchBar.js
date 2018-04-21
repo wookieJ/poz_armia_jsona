@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { productsFetchData } from "../actions/index";
 import PropTypes from "prop-types";
 import '../styles/main.css'
-
+import SortPanel from "./SortPanel";
 
 
 const buttonStyle = {
@@ -33,6 +33,7 @@ handleSubmit = (e) => {
 
 
   render() {
+    console.log(this.props.products);
 
     return (
         <div className = 'formDiv'>
@@ -48,7 +49,8 @@ handleSubmit = (e) => {
                 />
                 
                 <button className = 'button' type = 'submit' >Szukaj</button>
-            </form>
+            </form>   
+        {this.props.products.length > 0 && <SortPanel term = {this.state.searchTerm}/> }    
             </div>
     );
   }

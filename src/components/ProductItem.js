@@ -1,51 +1,41 @@
-import React, { Component } from 'react'
-import '../styles/main.css'
+import React, { Component } from "react";
+import "../styles/main.css";
 import { connect } from "react-redux";
 import { detailsFetchData } from "../actions/index";
 
-
 class ProductItem extends Component {
-
   handleClick = () => {
-    const url = 'https://poz-armia-jsona.herokuapp.com//offers/'
-    console.log(url + this.props.id);
-    
-    this.props.fetchDetails(url + this.props.id)
-    console.log(this.props.details);
-    
-  }
+    const url = "https://poz-armia-jsona.herokuapp.com//offers/";
+    this.props.fetchDetails(url + this.props.id);
+  };
 
-  
   render() {
-    const url = this.props.img
-    console.log(url);
-    
-    
+    const url = this.props.img;
+
     return (
-      <div className = "productItem" onClick = {this.handleClick}>
-        <div className = 'image'> 
-            <img src = {url}></img>
-           </div>
-          <p>{this.props.name}</p>
-          <p>cena:{this.props.price.amount}{this.props.price.currency}</p>
-        
-    </div>
-    )
+      <div className="productItem" onClick={this.handleClick}>
+        <div className="image">
+          <img src={url} />
+        </div>
+        <p id="description">{this.props.name}</p>
+        <p id="price">{this.props.price.amount},-</p>
+      </div>
+    );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-      details: state.details,
-      detailsHasErrored: state.detailsHasErrored,
-      detailsIsLoading: state.detailsIsLoading
-  }
-}
+    details: state.details,
+    detailsHasErrored: state.detailsHasErrored,
+    detailsIsLoading: state.detailsIsLoading
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return{
-      fetchDetails: (id) => dispatch(detailsFetchData(id))
-  }
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDetails: id => dispatch(detailsFetchData(id))
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductItem)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
