@@ -4,6 +4,8 @@ import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PhraseResolver {
 
@@ -19,7 +21,8 @@ public class PhraseResolver {
         phrase = PhraseParser.splitPhraseWithEmojis(phrase);
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (String word : phrase.split(" ")) {
+        String[] splittedWordBySpace = phrase.split(" ");
+        for (String word : splittedWordBySpace) {
             if (isWordEmoji(word)) {
                 String emojiName = emojiClient.getEmojiNameByUnicode(word);
                 String emojiNameInPolish = translatorClient.getTranslation(emojiName);

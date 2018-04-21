@@ -1,6 +1,7 @@
 package com.ArmiaJsona.emojiSearch;
 
 public class PhraseParser {
+
     public static String splitPhraseWithEmojis(String phrase) {
         StringBuilder splittedPhraseBuilder = new StringBuilder();
         for (int i = 0; i < phrase.length(); i++) {
@@ -12,6 +13,6 @@ public class PhraseParser {
                 splittedPhraseBuilder.append(phrase.charAt(i));
             }
         }
-        return splittedPhraseBuilder.toString().trim();
+        return splittedPhraseBuilder.toString().replaceAll("[ ]+"," ");
     }
 }
