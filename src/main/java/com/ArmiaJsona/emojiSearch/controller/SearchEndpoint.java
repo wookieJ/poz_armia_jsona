@@ -31,7 +31,7 @@ public class SearchEndpoint {
         this.allegroService = allegroService;
     }
 
-    @RequestMapping("/offers")
+    @GetMapping("/offers")
     public List<Offer> getOffers(@RequestParam(required = true) String name) {
         List<Offer> offers = new ArrayList<>();
         String payload = phraseResolver.translatePhrasesWithEmojiToText (name);

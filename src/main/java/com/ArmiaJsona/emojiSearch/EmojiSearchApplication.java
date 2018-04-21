@@ -4,7 +4,6 @@ import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
 import com.ArmiaJsona.emojiSearch.allegro.AllegroService;
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,16 +15,15 @@ public class EmojiSearchApplication implements CommandLineRunner {
     private final AllegroClient allegroClient;
     private final TranslatorClient yandexClient;
     private final PhraseResolver phraseResolver;
-
-    @Autowired
-    AllegroService allegroService;
+    private final AllegroService allegroService;
 
     public EmojiSearchApplication(EmojiClient emojipediaClient, AllegroClient allegroClient,
-                                  TranslatorClient yandexClient, PhraseResolver phraseResolver) {
+                                  TranslatorClient yandexClient, PhraseResolver phraseResolver,  AllegroService allegroService) {
         this.emojipediaClient = emojipediaClient;
         this.allegroClient =  allegroClient;
         this.yandexClient = yandexClient;
         this.phraseResolver = phraseResolver;
+        this.allegroService = allegroService;
     }
 
     public static void main(String[] args) {

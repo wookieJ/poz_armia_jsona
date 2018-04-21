@@ -16,12 +16,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class EmojiSearchApplicationTests {
 
-    @Autowired
-    private EmojiClient emojipediaClient;
-    @Autowired
-    private YandexClient yandexClient;
-    @Autowired
-    private AllegroClient allegroClient;
+	@Autowired
+	private EmojiClient emojipediaClient;
+	@Autowired
+	private YandexClient yandexClient;
+	@Autowired
+	private AllegroClient allegroClient;
+	@Autowired
+    private PhraseResolver phraseResolver;
 
     @Test
     public void getEmojiNameByUnicodeTest() {
@@ -41,10 +43,17 @@ public class EmojiSearchApplicationTests {
         assertThat(body).isNotEmpty();
     }
 
-    @Test
-    public void returnAllegroOfferByIdTest() {
+	@Test
+	public void returnAllegroOfferByIdTest() {
         OfferDetail offerDetail = allegroClient.getOfferById("7074249172");
         assertThat(offerDetail).isNotNull();
+	}
+
+    @Test
+    public void parseInputTest() {
+	    String body = phraseResolver.translatePhrasesWithEmojiToText("\uD83D\uDC7B\uD83C\uDF85test");
+        System.out.println(body);
+        assertThat(body).isEqualToIgnoringCase("Duch Święty Mikołaj test");
     }
 
 

@@ -4,8 +4,6 @@ import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class PhraseResolver {
 
