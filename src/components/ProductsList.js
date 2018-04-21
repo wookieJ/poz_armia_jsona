@@ -7,9 +7,8 @@ class ProductList extends Component {
   render() {
     return (
       <div>
-        {this.props.products.map((item) => {
-            <ProductItem />
-        })}
+       {/* {this.props.products && this.props.products.map(product => <p>{product.name}</p>)} */}
+       {this.props.products && this.props.products.map(product => <ProductItem key = {product.id} />)}
       </div>
     )
   }

@@ -21,12 +21,22 @@ state = {
 
 
 
+
 onChange = e => this.setState({searchTerm: e.target.value})
 
+handleSubmit = (e) => {
+    e.preventDefault()
+    const url = 'https://poz-armia-jsona.herokuapp.com//offers?name='
+    console.log(url + this.state.searchTerm);
+    this.props.fetchData(url + this.state.searchTerm)
+}
+
+
   render() {
+
     return (
         <div className = 'formDiv'>
-            <form>
+            <form onSubmit = {this.handleSubmit}>
                 <span className = 'logo'> emojillegro </span>
                 <input
                     className='input'
@@ -35,11 +45,9 @@ onChange = e => this.setState({searchTerm: e.target.value})
                     name="searchTerm"
                     placeholder="Czego szukasz?"
                     onChange = {this.onChange}
-                    //onSubmit = {this.props.fetchData('http://jsonplaceholder.typicode.com/posts')}
-                    onSubmit = {this.props.fetchData('https://poz-armia-jsona.herokuapp.com/search?name=name')}
                 />
                 
-                <button className = 'button' >Szukaj</button>
+                <button className = 'button' type = 'submit' >Szukaj</button>
             </form>
             </div>
     );
