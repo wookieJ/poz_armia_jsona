@@ -29,15 +29,17 @@ public class AllegroClient implements AllegroClientInterface {
     }
 
     @Override
-    public AllOffersResponse getAllOffersByPhrase(String phrase) {
+    public AllOffersResponse getAllOffersByPhrase(String phrase,String sort) {
+        if(null != sort) {
+            return getAllOffersByPhraseSortedBy(phrase, sort);
+        }
         return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase,
                 HttpMethod.GET,
                 buildHttpHeadersForAllegro(),
                 AllOffersResponse.class).getBody();
     }
 
-    @Override
-    public AllOffersResponse getAllOffersByPhraseSortedBy(String phrase, String sort) {
+    private AllOffersResponse getAllOffersByPhraseSortedBy(String phrase, String sort) {
         return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase + "&sort=" + sort,
                 HttpMethod.GET,
                 buildHttpHeadersForAllegro(),

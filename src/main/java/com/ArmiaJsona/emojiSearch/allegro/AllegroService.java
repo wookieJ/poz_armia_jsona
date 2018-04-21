@@ -12,7 +12,7 @@ public class AllegroService {
     private PhraseResolver phraseResolver;
     private AllegroClientInterface allegroClient;
 
-    public AllegroService(AllegroClient allegroClient,PhraseResolver phraseResolver) {
+    public AllegroService(AllegroClient allegroClient, PhraseResolver phraseResolver) {
         this.allegroClient = allegroClient;
         this.phraseResolver = phraseResolver;
     }
@@ -21,13 +21,8 @@ public class AllegroService {
         return allegroClient.getOfferById(offerId);
     }
 
-    public List<Offer> getAllOffersByPhrase(String phrase) {
+    public List<Offer> getAllOffersByPhrase(String phrase, String sort) {
         String payload = phraseResolver.translatePhrasesWithEmojiToText(phrase);
-        return allegroClient.getAllOffersByPhrase(payload).getOfferList();
-    }
-
-    public List<Offer> getAllOffersByPhraseSortedBy(String phrase,String sort) {
-        String payload = phraseResolver.translatePhrasesWithEmojiToText(phrase);
-        return allegroClient.getAllOffersByPhraseSortedBy(payload, sort).getOfferList();
+        return allegroClient.getAllOffersByPhrase(payload, sort).getOfferList();
     }
 }

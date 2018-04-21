@@ -21,14 +21,9 @@ public class SearchEndpoint {
     }
 
     @GetMapping("/offers")
-    public ResponseEntity<List<Offer>> getOffers(@RequestParam String phrase) {
-        return ResponseEntity.ok(allegroService.getAllOffersByPhrase(phrase));
-    }
-
-    @GetMapping("/offers")
-    public ResponseEntity<List<Offer>> getOffers(@RequestParam String phrase,
-                                                 @RequestParam String sort) {
-        return ResponseEntity.ok(allegroService.getAllOffersByPhraseSortedBy(phrase, sort));
+    public ResponseEntity<List<Offer>> getOffersSorted(@RequestParam String phrase,
+                                                 @RequestParam(required = false) String sort) {
+        return ResponseEntity.ok(allegroService.getAllOffersByPhrase(phrase, sort));
     }
 
     @GetMapping("/offers/{offerId}")
