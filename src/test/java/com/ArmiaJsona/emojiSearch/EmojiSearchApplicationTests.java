@@ -34,7 +34,7 @@ public class EmojiSearchApplicationTests {
 
     @Test
     public void translateGrapesToPolishTest() {
-        String body = this.yandexClient.getTranslation("grapes");
+        String body = this.yandexClient.getTranslationFor("grapes");
         assertThat(body).isEqualToIgnoringCase("winogrona");
     }
 
