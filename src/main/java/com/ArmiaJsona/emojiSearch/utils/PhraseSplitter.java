@@ -1,6 +1,6 @@
 package com.ArmiaJsona.emojiSearch.utils;
 
-public class PhraseSplitter {
+class PhraseSplitter {
 
     public static String splitPhraseWithEmojis(String phrase) {
         StringBuilder splittedPhraseBuilder = new StringBuilder();

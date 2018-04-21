@@ -7,7 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 @Service
 public class EmojipediaClient implements EmojiClient {
@@ -15,7 +15,7 @@ public class EmojipediaClient implements EmojiClient {
     @Value("${Emojipedia.URL}")
     private String emojipediaUrl;
 
-    private RestTemplate emojipediaRestTemplate;
+    private final RestTemplate emojipediaRestTemplate;
 
     public EmojipediaClient(RestTemplate emojipediaRestTemplate) {
         this.emojipediaRestTemplate = emojipediaRestTemplate;
@@ -49,8 +49,7 @@ public class EmojipediaClient implements EmojiClient {
 
     private HttpEntity getUserAgent() {
         HttpHeaders headers = new HttpHeaders();
-        headers.put(HttpHeaders.USER_AGENT, Arrays.asList("Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"));
-        HttpEntity entity = new HttpEntity(headers);
-        return entity;
+        headers.put(HttpHeaders.USER_AGENT, Collections.singletonList("Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"));
+        return new HttpEntity(headers);
     }
 }

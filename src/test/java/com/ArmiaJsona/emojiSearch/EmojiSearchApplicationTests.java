@@ -46,5 +46,6 @@ public class EmojiSearchApplicationTests {
 		assertThat(body).isNotEmpty();
 	}
 
+    
 
 }

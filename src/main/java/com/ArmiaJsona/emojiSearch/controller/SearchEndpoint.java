@@ -7,19 +7,19 @@ import com.ArmiaJsona.emojiSearch.model.OfferList;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class SearchEndpoint
 {
-    private EmojiClient emojipediaClient;
-    private AllegroClient allegroClient;
-    private TranslatorClient yandexClient;
+    private final EmojiClient emojipediaClient;
+    private final AllegroClient allegroClient;
+    private final TranslatorClient yandexClient;
 
     public SearchEndpoint(EmojiClient emojipediaClient, AllegroClient allegroClient, TranslatorClient yandexClient)
     {
@@ -29,12 +29,12 @@ public class SearchEndpoint
     }
 
     @RequestMapping("/search")
-    public List<Offer> getOffers(@RequestParam(required = true) String name)
+    public List<Offer> getOffers()
     {
         List<Offer> offers = new ArrayList<>();
         String payload = null;
-        name = "\uD83C\uDF47";
-        if (!name.equals("") && name != null)
+        String name = "\uD83C\uDF47";
+        if (name != null && !name.equals(""))
         {
             payload = emojipediaClient.getEmojiNameByUnicode(name);
             payload = yandexClient.getTranslation(payload);
@@ -51,6 +51,6 @@ public class SearchEndpoint
             e.printStackTrace();
         }
 
-        return offerList.getOfferList();
+        return Objects.requireNonNull(offerList).getOfferList();
     }
 }
