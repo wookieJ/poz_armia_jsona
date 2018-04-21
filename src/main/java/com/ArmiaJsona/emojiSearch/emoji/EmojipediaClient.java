@@ -12,13 +12,14 @@ import java.util.Collections;
 @Service
 public class EmojipediaClient implements EmojiClient {
 
-    @Value("${Emojipedia.URL}")
     private String emojipediaUrl;
 
     private final RestTemplate emojipediaRestTemplate;
 
-    public EmojipediaClient(RestTemplate emojipediaRestTemplate) {
+    public EmojipediaClient(RestTemplate emojipediaRestTemplate,
+                            @Value("${Emojipedia.URL}") String emojipediaUrl) {
         this.emojipediaRestTemplate = emojipediaRestTemplate;
+        this.emojipediaUrl = emojipediaUrl;
     }
 
     @Override
