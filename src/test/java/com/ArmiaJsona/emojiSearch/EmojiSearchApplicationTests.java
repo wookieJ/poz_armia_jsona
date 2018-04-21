@@ -46,7 +46,7 @@ public class EmojiSearchApplicationTests {
 	@Test
 	public void returnAllegroOfferByIdTest() {
         OfferDetail offerDetail = allegroClient.getOfferById("7074249172");
-        assertThat(offerDetail) .isNotNull();
+        assertThat(offerDetail).isNotNull();
 	}
 
     @Test
@@ -56,4 +56,7 @@ public class EmojiSearchApplicationTests {
         assertThat(body).isEqualToIgnoringCase("Duch Święty Mikołaj test");
     }
 
+    @Test
+    public void splitPhraseWithEmojisTest() {
+    }
 }
