@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OfferDetail {
 
-    private String id;
-    private String name;
+    public String id;
+    public String name;
 
     @Override
     public String toString() {
