@@ -53,8 +53,8 @@ public class PhraseResolver {
             if (word.split(" ").length > NUMBER_OF_WORDS) {
                 String[] wordsInEmoji = word.split(" ");
                 word = wordsInEmoji[0] + " " + wordsInEmoji[1];
-                word = translatorClient.getTranslationFor(word);
             }
+            word = translatorClient.getTranslationFor(word);
             builder.append(word)
                     .append(" ");
         }
