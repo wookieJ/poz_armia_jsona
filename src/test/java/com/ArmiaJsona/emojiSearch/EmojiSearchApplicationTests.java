@@ -56,5 +56,7 @@ public class EmojiSearchApplicationTests {
         assertThat(body).isEqualToIgnoringCase("Duch Święty Mikołaj test");
     }
 
-
+    @Test
+    public void splitPhraseWithEmojisTest() {
+    }
 }
