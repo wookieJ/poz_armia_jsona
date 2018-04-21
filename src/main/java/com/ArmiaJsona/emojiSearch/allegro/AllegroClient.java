@@ -1,5 +1,6 @@
 package com.ArmiaJsona.emojiSearch.allegro;
 
+import com.ArmiaJsona.emojiSearch.controller.OfferDetail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -28,9 +29,10 @@ public class AllegroClient implements AllegroClientInterface {
        return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase, HttpMethod.GET, buildPhraseSearchHttpHeaders(), String.class ).getBody();
     }
 
+
     @Override
-    public String getOfferbyId(String id) {
-        return allegroRestTemplate.exchange(allegroIdApiUrl + "v1/allegro/offers/" + id, HttpMethod.GET, buildIdSearchHttpHeaders(), String.class ).getBody();
+    public OfferDetail getOfferById(String id) {
+        return null;
     }
 
     private HttpEntity buildPhraseSearchHttpHeaders() {

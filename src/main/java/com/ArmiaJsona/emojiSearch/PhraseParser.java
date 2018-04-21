@@ -12,6 +12,6 @@ class PhraseParser {
                 splittedPhraseBuilder.append(phrase.charAt(i));
             }
         }
-        return splittedPhraseBuilder.toString().trim();
+        return splittedPhraseBuilder.toString().replaceAll("[ ]+"," ");
     }
 }
