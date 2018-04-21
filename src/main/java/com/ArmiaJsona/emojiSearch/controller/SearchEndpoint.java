@@ -11,33 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
-public class SearchEndpoint
-{
+public class SearchEndpoint {
     private AllegroClient allegroClient;
     private PhraseResolver phraseResolver;
 
-    public SearchEndpoint(AllegroClient allegroClient, PhraseResolver phraseResolver)
-    {
+    public SearchEndpoint(AllegroClient allegroClient, PhraseResolver phraseResolver) {
         this.allegroClient = allegroClient;
         this.phraseResolver = phraseResolver;
     }
 
     @RequestMapping("/offers")
-    public List<Offer> getOffers(@RequestParam(required = true) String name)
-    {
+    public List<Offer> getOffers(@RequestParam(required = true) String name) {
         List<Offer> offers = new ArrayList<>();
         String payload = phraseResolver.translatePhrasesWithEmojiToText(name);
 
         ObjectMapper mapper = new ObjectMapper();
-        OfferList offerList = null;
-        try
-        {
+        OfferList offerList = new OfferList();
+        try {
             offerList = mapper.readValue(allegroClient.getOffersByPhrase(payload), OfferList.class);
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

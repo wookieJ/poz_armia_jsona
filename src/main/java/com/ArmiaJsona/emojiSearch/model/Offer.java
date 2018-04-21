@@ -1,62 +1,48 @@
 package com.ArmiaJsona.emojiSearch.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Offer
-{
-    @JsonProperty("id")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Offer {
     private String id;
-    @JsonProperty("url")
     private String url;
-    @JsonProperty("name")
     private String name;
+    private Prices prices;
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Offer(String id, String url, String name)
-    {
-        this.id = id;
-        this.url = url;
-        this.name = name;
+    public Prices getPrices() {
+        return prices;
     }
 
-    public Offer()
-    {
+    public void setPrices(Prices prices) {
+        this.prices = prices;
     }
 
-    //    @JsonProperty("buyNow")
-//    private boolean buyNow;
-//    @JsonProperty("advert")
-//    private boolean advert;
-
+    public Offer() {
+    }
 }
