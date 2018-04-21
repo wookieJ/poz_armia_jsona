@@ -37,10 +37,10 @@ public class PhraseResolver {
 
     public String getPhraseInEnglish() {
         StringBuilder builder = new StringBuilder();
-        for(String word : this.phrase) {
-            if(word.length() > NUMBER_OF_WORDS) {
+        for (String word : this.phrase) {
+            if (word.split(" ").length > NUMBER_OF_WORDS) {
                 String[] wordsInEmoji = word.split(" ");
-                word = wordsInEmoji[0] + wordsInEmoji[1];
+                word = wordsInEmoji[0] + " " + wordsInEmoji[1];
             }
             builder.append(word)
                     .append(" ");
@@ -50,10 +50,10 @@ public class PhraseResolver {
 
     public String getPhraseInPolish() {
         StringBuilder builder = new StringBuilder();
-        for(String word : this.phrase) {
-            if(word.length() > NUMBER_OF_WORDS) {
+        for (String word : this.phrase) {
+            if (word.split(" ").length > NUMBER_OF_WORDS) {
                 String[] wordsInEmoji = word.split(" ");
-                word = wordsInEmoji[0] + wordsInEmoji[1];
+                word = wordsInEmoji[0] + " " + wordsInEmoji[1];
                 word = translatorClient.getTranslationFor(word);
             }
             builder.append(word)
