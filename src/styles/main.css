@@ -18,6 +18,7 @@ form{
     color: white;
     text-transform: uppercase;
     border: none;
+    font-weight: bold;
 }
 
 .input {
@@ -32,6 +33,7 @@ form{
     padding: 1.5em;
     font-size: 2.5em;
     color:#ff5a00; 
+    font-weight: bold;
 }
 
 #emoji {
@@ -59,6 +61,14 @@ form{
 #description {
     grid-column: 3/5;
     margin-top: 3.5em;
+}
+
+.spans{
+    margin-left: 1em;
+}
+
+.spans:hover{
+    text-decoration: underline;
 }
 
 #price{

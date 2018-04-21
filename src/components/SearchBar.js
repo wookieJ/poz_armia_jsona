@@ -26,25 +26,23 @@ onChange = e => this.setState({searchTerm: e.target.value})
 
 handleSubmit = (e) => {
     e.preventDefault()
-    const url = 'https://poz-armia-jsona.herokuapp.com//offers?name='
+    const url = 'https://poz-armia-jsona.herokuapp.com//offers?phrase='
     console.log(url + this.state.searchTerm);
     this.props.fetchData(url + this.state.searchTerm)
 }
 
 
   render() {
-    console.log(this.props.products);
-
     return (
         <div className = 'formDiv'>
             <form onSubmit = {this.handleSubmit}>
-                <span className = 'logo'> emojillegr <span id='emoji'>🤑</span> </span>
+                <span className = 'logo'> emojillegr<span id='emoji'>🤑</span> </span>
                 <input
                     className='input'
                     type="text"
                     id="searchTerm"
                     name="searchTerm"
-                    placeholder="Czego szukasz?"
+                    placeholder="Czego szukasz? 🤷"
                     onChange = {this.onChange}
                 />
                 
