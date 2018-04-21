@@ -1,3 +1,4 @@
 .idea
 emojiSearch.iml
-target
+*/target/*
+*.class
