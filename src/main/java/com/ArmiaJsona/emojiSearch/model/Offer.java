@@ -1,7 +1,10 @@
 package com.ArmiaJsona.emojiSearch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -10,6 +13,9 @@ public class Offer {
     private String url;
     private String name;
     private Prices prices;
+    private Price price;
+    private List<Url> images;
+    private String image;
 
     public String getId() {
         return id;
@@ -35,12 +41,20 @@ public class Offer {
         this.name = name;
     }
 
-    public Prices getPrices() {
-        return prices;
+    public Price getPrice(){
+        return prices.getPrice();
     }
 
     public void setPrices(Prices prices) {
         this.prices = prices;
+    }
+
+    public String getImage() {
+        return images.get(0).getUrl();
+    }
+
+    public void setImages(List<Url> images) {
+        this.images = images;
     }
 
     public Offer() {
