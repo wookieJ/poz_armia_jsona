@@ -1,6 +1,8 @@
 package com.ArmiaJsona.emojiSearch;
 
 import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
+import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
+import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.YandexClient;
 import org.junit.Test;
@@ -24,28 +26,28 @@ public class EmojiSearchApplicationTests {
 	@Autowired
     private PhraseResolver phraseResolver;
 
-	@Test
-	public void getEmojiNameByUnicodeTest() {
-		String body = this.emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47");
-		assertThat(body).isEqualToIgnoringCase("Grapes");
-	}
+    @Test
+    public void getEmojiNameByUnicodeTest() {
+        String body = this.emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47");
+        assertThat(body).isEqualToIgnoringCase("Grapes");
+    }
 
-	@Test
-	public void translateGrapesToPolishTest() {
-		String body = this.yandexClient.getTranslation("grapes");
-		assertThat(body).isEqualToIgnoringCase("winogrona");
-	}
+    @Test
+    public void translateGrapesToPolishTest() {
+        String body = this.yandexClient.getTranslation("grapes");
+        assertThat(body).isEqualToIgnoringCase("winogrona");
+    }
 
-	@Test
-	public void returnAllegroOffersByPhraseTest() {
-		String body = this.allegroClient.getOffersByPhrase("winogrona");
-		assertThat(body).isNotEmpty();
-	}
+    @Test
+    public void returnAllegroOffersByPhraseTest() {
+        String body = this.allegroClient.getOffersByPhrase("winogrona");
+        assertThat(body).isNotEmpty();
+    }
 
 	@Test
 	public void returnAllegroOfferByIdTest() {
-		String body = this.allegroClient.getOfferbyId("7074249172");
-		assertThat(body).isNotEmpty();
+        OfferDetail offerDetail = allegroClient.getOfferById("7074249172");
+        assertThat(offerDetail).isNotNull();
 	}
 
     @Test
