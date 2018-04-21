@@ -14,9 +14,14 @@ public class OfferDetail {
     @JsonProperty("description")
     private Description offerDescription;
     private String description;
+    private long views;
 
     public String getDescription() {
         return offerDescription.getPlainText();
+    }
+
+    public long getViews() {
+        return views;
     }
 
     public OfferDetail(){
