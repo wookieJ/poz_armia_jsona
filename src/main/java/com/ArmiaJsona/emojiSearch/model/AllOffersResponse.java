@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class OfferList {
+public class AllOffersResponse {
+
     @JsonProperty("offers")
     private List<Offer> offerList;
 
@@ -18,8 +18,5 @@ public class OfferList {
 
     public void setOfferList(List<Offer> offerList) {
         this.offerList = offerList;
-    }
-
-    public OfferList() {
     }
 }

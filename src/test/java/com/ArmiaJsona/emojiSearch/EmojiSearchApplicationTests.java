@@ -3,6 +3,7 @@ package com.ArmiaJsona.emojiSearch;
 import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
 import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
+import com.ArmiaJsona.emojiSearch.model.AllOffersResponse;
 import com.ArmiaJsona.emojiSearch.translator.YandexClient;
 import com.ArmiaJsona.emojiSearch.utils.PhraseResolver;
 import org.junit.Test;
@@ -40,8 +41,8 @@ public class EmojiSearchApplicationTests {
 
     @Test
     public void returnAllegroOffersByPhraseTest() {
-        String body = this.allegroClient.getOffersByPhrase("winogrona");
-        assertThat(body).isNotEmpty();
+        AllOffersResponse allOffersResponse = this.allegroClient.getAllOffersByPhrase("winogrona");
+        assertThat(allOffersResponse).isNotNull();
     }
 
 	@Test
