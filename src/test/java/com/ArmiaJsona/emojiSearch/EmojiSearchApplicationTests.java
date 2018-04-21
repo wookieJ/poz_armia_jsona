@@ -1,6 +1,7 @@
 package com.ArmiaJsona.emojiSearch;
 
 import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
+import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.YandexClient;
 import org.junit.Test;
@@ -15,37 +16,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class EmojiSearchApplicationTests {
 
-	@Autowired
-	private EmojiClient emojipediaClient;
-	@Autowired
-	private YandexClient yandexClient;
-	@Autowired
-	private AllegroClient allegroClient;
+    @Autowired
+    private EmojiClient emojipediaClient;
+    @Autowired
+    private YandexClient yandexClient;
+    @Autowired
+    private AllegroClient allegroClient;
 
-	@Test
-	public void getEmojiNameByUnicodeTest() {
-		String body = this.emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47");
-		assertThat(body).isEqualToIgnoringCase("Grapes");
-	}
+    @Test
+    public void getEmojiNameByUnicodeTest() {
+        String body = this.emojipediaClient.getEmojiNameByUnicode("\uD83C\uDF47");
+        assertThat(body).isEqualToIgnoringCase("Grapes");
+    }
 
-	@Test
-	public void translateGrapesToPolishTest() {
-		String body = this.yandexClient.getTranslation("grapes");
-		assertThat(body).isEqualToIgnoringCase("winogrona");
-	}
+    @Test
+    public void translateGrapesToPolishTest() {
+        String body = this.yandexClient.getTranslation("grapes");
+        assertThat(body).isEqualToIgnoringCase("winogrona");
+    }
 
-	@Test
-	public void returnAllegroOffersByPhraseTest() {
-		String body = this.allegroClient.getOffersByPhrase("winogrona");
-		assertThat(body).isNotEmpty();
-	}
+    @Test
+    public void returnAllegroOffersByPhraseTest() {
+        String body = this.allegroClient.getOffersByPhrase("winogrona");
+        assertThat(body).isNotEmpty();
+    }
 
-	@Test
-	public void returnAllegroOfferByIdTest() {
-		String body = this.allegroClient.getOfferbyId("7074249172");
-		assertThat(body).isNotEmpty();
-	}
-
+    @Test
+    public void returnAllegroOfferByIdTest() {
+        OfferDetail offerDetail = allegroClient.getOfferById("7074249172");
+        assertThat(offerDetail).isNotNull();
+    }
 
 
 }

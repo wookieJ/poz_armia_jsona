@@ -1,6 +1,5 @@
 package com.ArmiaJsona.emojiSearch.allegro;
 
-import com.ArmiaJsona.emojiSearch.controller.OfferDetail;
 import org.springframework.stereotype.Service;
 
 @Service

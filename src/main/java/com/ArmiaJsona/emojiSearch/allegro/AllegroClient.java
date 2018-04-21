@@ -1,10 +1,10 @@
 package com.ArmiaJsona.emojiSearch.allegro;
 
-import com.ArmiaJsona.emojiSearch.controller.OfferDetail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,13 +26,17 @@ public class AllegroClient implements AllegroClientInterface {
 
     @Override
     public String getOffersByPhrase(String phrase) {
-       return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase, HttpMethod.GET, buildPhraseSearchHttpHeaders(), String.class ).getBody();
+        return allegroRestTemplate.exchange(allegroApiUrl + "offers?phrase=" + phrase, HttpMethod.GET, buildPhraseSearchHttpHeaders(), String.class).getBody();
     }
-
 
     @Override
     public OfferDetail getOfferById(String id) {
-        return null;
+        ResponseEntity<OfferDetail> offerDetail = allegroRestTemplate.exchange(
+                allegroIdApiUrl + "v1/allegro/offers/" + id,
+                HttpMethod.GET,
+                buildIdSearchHttpHeaders(),
+                OfferDetail.class);
+        return offerDetail.getBody();
     }
 
     private HttpEntity buildPhraseSearchHttpHeaders() {
@@ -51,5 +55,4 @@ public class AllegroClient implements AllegroClientInterface {
         headers.put(HttpHeaders.ACCEPT, Collections.singletonList("application/vnd.allegro.public.v1+json"));
         return new HttpEntity(headers);
     }
-
 }
