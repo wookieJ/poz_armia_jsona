@@ -1,7 +1,8 @@
-package com.ArmiaJsona.emojiSearch;
+package com.ArmiaJsona.emojiSearch.utils;
 
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
+import com.ArmiaJsona.emojiSearch.utils.PhraseParser;
 import org.springframework.stereotype.Service;
 
 @Service
