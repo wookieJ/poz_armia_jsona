@@ -21,6 +21,8 @@ public class EmojiSearchApplicationTests {
 	private YandexClient yandexClient;
 	@Autowired
 	private AllegroClient allegroClient;
+	@Autowired
+    private PhraseResolver phraseResolver;
 
 	@Test
 	public void getEmojiNameByUnicodeTest() {
@@ -46,6 +48,13 @@ public class EmojiSearchApplicationTests {
 		assertThat(body).isNotEmpty();
 	}
 
-    
+    @Test
+    public void parseInputTest() {
+	    String body = phraseResolver.translatePhrasesWithEmojiToText("\uD83D\uDC7B\uD83C\uDF85test");
+        System.out.println(body);
+        assertThat(body).isEqualToIgnoringCase("Duch Święty Mikołaj test");
+    }
+
+
 
 }
