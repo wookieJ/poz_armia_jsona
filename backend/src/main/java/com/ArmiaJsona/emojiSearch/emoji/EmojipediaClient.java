@@ -1,5 +1,6 @@
 package com.ArmiaJsona.emojiSearch.emoji;
 
+import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,22 +16,33 @@ public class EmojipediaClient implements EmojiClient {
     private String emojipediaUrl;
 
     private final RestTemplate emojipediaRestTemplate;
+    private final Cache<String, String> emojiCache;
 
     public EmojipediaClient(RestTemplate emojipediaRestTemplate,
+                            Cache<String, String> emojiCache,
                             @Value("${Emojipedia.URL}") String emojipediaUrl) {
         this.emojipediaRestTemplate = emojipediaRestTemplate;
         this.emojipediaUrl = emojipediaUrl;
+        this.emojiCache = emojiCache;
     }
 
     @Override
     public String getEmojiNameByUnicode(String unicode) {
+
+        if (emojiCache.getIfPresent(unicode) != null) {
+            System.out.println("taking data from cache");
+            return emojiCache.getIfPresent(unicode);
+        }
+
         String payload = emojipediaRestTemplate.exchange(emojipediaUrl + unicode,
                 HttpMethod.GET,
                 getUserAgent(),
                 String.class).getBody();
 
         String jsonData = getEmojiDescriptionAsJson(payload);
-        return getEmojiNameFromJson(jsonData);
+        String emojiName = getEmojiNameFromJson(jsonData);
+        emojiCache.put(unicode, emojiName);
+        return emojiName;
     }
 
     private String getEmojiNameFromJson(String jsonData) {
