@@ -1,6 +1,6 @@
 package com.ArmiaJsona.emojiSearch.model;
 
-public class Url {
+class Url {
     private String url;
 
     public String getUrl() {

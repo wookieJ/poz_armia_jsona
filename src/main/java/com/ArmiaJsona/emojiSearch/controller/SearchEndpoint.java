@@ -48,7 +48,7 @@ public class SearchEndpoint {
     }
 
     @GetMapping("/offers/{id}")
-    public ResponseEntity<OfferDetail> getOfferDetails(@PathVariable String offerId) {
+    public ResponseEntity<OfferDetail> getOfferDetails(@PathVariable("id") String offerId) {
         return new ResponseEntity<>(allegroService.getOfferById(offerId), HttpStatus.OK);
     }
 }

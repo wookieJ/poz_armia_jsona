@@ -2,7 +2,6 @@ package com.ArmiaJsona.emojiSearch;
 
 import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
 import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
-import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.YandexClient;
 import org.junit.Test;
