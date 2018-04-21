@@ -4,6 +4,7 @@ import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
 import com.ArmiaJsona.emojiSearch.allegro.AllegroService;
 import com.ArmiaJsona.emojiSearch.emoji.EmojiClient;
 import com.ArmiaJsona.emojiSearch.translator.TranslatorClient;
+import com.ArmiaJsona.emojiSearch.utils.PhraseResolver;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

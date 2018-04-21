@@ -1,6 +1,6 @@
 package com.ArmiaJsona.emojiSearch.controller;
 
-import com.ArmiaJsona.emojiSearch.PhraseResolver;
+import com.ArmiaJsona.emojiSearch.utils.PhraseResolver;
 import com.ArmiaJsona.emojiSearch.allegro.AllegroClient;
 import com.ArmiaJsona.emojiSearch.allegro.AllegroService;
 import com.ArmiaJsona.emojiSearch.allegro.OfferDetail;
@@ -19,7 +19,6 @@ import java.util.List;
 @RestController
 public class SearchEndpoint {
 
-    private EmojiClient emojipediaClient;
     private AllegroClient allegroClient;
     private PhraseResolver phraseResolver;
     private AllegroService allegroService;
@@ -32,14 +31,18 @@ public class SearchEndpoint {
     }
 
     @GetMapping("/offers")
-    public List<Offer> getOffers(@RequestParam(required = true) String name) {
-        List<Offer> offers = new ArrayList<>();
+    public List<Offer> getOffers(@RequestParam String name, @RequestParam(required = false) String sort) {
         String payload = phraseResolver.translatePhrasesWithEmojiToText (name);
 
         ObjectMapper mapper = new ObjectMapper();
         OfferList offerList = new OfferList();
         try {
-            offerList = mapper.readValue(allegroClient.getOffersByPhrase(payload), OfferList.class);
+            if(sort == null)
+                sort = "";
+            else {
+                sort = "&sort=" + sort;
+            }
+            offerList = mapper.readValue(allegroClient.getOffersByPhrase(payload + sort), OfferList.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
