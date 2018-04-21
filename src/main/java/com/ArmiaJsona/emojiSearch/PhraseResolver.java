@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PhraseResolver {
 
-    private TranslatorClient translatorClient;
+    private final TranslatorClient translatorClient;
     private EmojiClient emojiClient;
 
     public PhraseResolver(TranslatorClient translatorClient, EmojiClient emojiClient) {
